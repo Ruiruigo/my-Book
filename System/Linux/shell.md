@@ -139,6 +139,29 @@ history命令来获取用户的命令执行历史记录
 
 ---
 
+### xargs
+
+xargs全称是transform arguments，意为转换参数，它将标准输入转换为命令行参数。因为linux命令行中经常要使用到管道符连接不同的命令，但是有些命令不支持标准输入，此时就需要使用xargs将标准输入转换为参数。
+
+- **格式**
+
+```shell
+input | xargs [option] cmd
+```
+
+- **常见使用**
+
+```shell
+====
+echo arg1 arg2 arg3 | xargs echo
+arg1 arg2 arg3
+====
+#删除
+find / -name {name} | xargs rm -rf
+```
+
+---
+
 ### firewalld
 
 * **命令格式**
