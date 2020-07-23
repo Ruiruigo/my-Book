@@ -2,7 +2,7 @@
 
 多人运动领导者
 
-![Cobalt Strike](./imgs/Cobalt Strike.jpg)
+![CobaltStrike](./imgs/CobaltStrike.jpg)
 
 ## 界面翻译
 
