@@ -53,7 +53,7 @@ requests.utils.dict_from_cookiejar(requests.cookies,session.cookies)
 ## 获取响应头
 
 ```
-.headers  #返回数组的形式
+.headers  #返回字典的形式
 ====
 r = requests.get('https://www.baidu.com')
 print(r.headers['Server'])
