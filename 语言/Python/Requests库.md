@@ -50,3 +50,13 @@ requests.utils.dict_from_cookiejar(requests.cookies,session.cookies)
 
 返回数据类型为：<class 'requests.sessions.Session’>
 
+## 获取响应头
+
+```
+.headers  #返回数组的形式
+====
+r = requests.get('https://www.baidu.com')
+print(r.headers['Server'])
+print(r.headers.get('Server'))  #两种方式
+```
+
