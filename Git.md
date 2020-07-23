@@ -2,4 +2,4 @@
 
 ---
 
-![Git](../mine/imgs/Git.png)
+![Git](./imgs/Git.png)
