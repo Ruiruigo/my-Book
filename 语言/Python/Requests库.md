@@ -60,3 +60,10 @@ print(r.headers['Server'])
 print(r.headers.get('Server'))  #两种方式
 ```
 
+## 提取cookies
+
+```
+cookie = requests.get('https://www.baidu.com').cookies
+requests.utils.dict_from_cookiejar(cookie)		#提取字典形式的cookie
+```
+
