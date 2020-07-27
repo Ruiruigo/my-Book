@@ -7,6 +7,7 @@
 * net user guest /active:Yes (激活guest用户) 
 * net user guest 12345 (修改guest密码为12345) 
 * net user (查看账号属性) 
+* whoami 当前用户
 
 ## 服务
 
