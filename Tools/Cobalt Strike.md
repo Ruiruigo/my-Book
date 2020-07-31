@@ -198,7 +198,6 @@ Beacon Commands
     reg                       Query the registry
     rev2self                  恢复原始令牌
     rm                        删除文件或文件夹
-    rportfwd                  端口转发
     run                       在目标上执行程序(返回输出)
     runas                     以其他用户权限执行程序
     runasadmin                在高权限下执行程序
