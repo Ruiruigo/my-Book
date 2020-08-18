@@ -105,6 +105,14 @@ and extractvalue(1,concat(0x7e,(select database()))) --+ 库名称
 updatexml()类似extractvalue() 方法
 ```
 
+
+
+
+
+
+
+
+
 ## 扩展
 
 ```

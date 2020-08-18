@@ -7,7 +7,7 @@ JSFinder是一款用作快速在网站的js文件中提取URL，子域名的工�
 - **简单爬取**
 
 ```shell
-python JSFinder.py -u http://www.mi.com
+python3 JSFinder.py -u http://www.mi.com
 ```
 
 这个命令会爬取 http://www.mi.com 这单个页面的所有的js链接，并在其中发现url和子域名
